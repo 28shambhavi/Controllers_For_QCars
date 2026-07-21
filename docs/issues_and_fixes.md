@@ -1,12 +1,12 @@
-#Qcar Set Up, Issues, and Fixes
+# Qcar Set Up, Issues, and Fixes
 
-#QCar Setup
+# QCar Setup
 
 The QCar setup can be completed using the official Quanser Academic Resources repository, which provides documentation for hardware setup, software installation, and system configuration.
 
 Some of the setup issues encountered during this project, along with their fixes and useful commands, are documented below.
 
-#Network and Lab Configuration
+# Network and Lab Configuration
 
 >Lab Network Channel
 The Wi-Fi channel on the lab network may need to be adjusted for the QCars, as interference can affect communication with other robots on the same network.
@@ -17,12 +17,12 @@ Server IP: 192.168.1.166
 Client IP: 192.168.1.111
 Multicast Address: 239.255.42.101
 
-#QCar Subscriber Script
+# QCar Subscriber Script
 A script was created on the QCar for subscribing and running the controller: ./run_car.sh
 
-#Python and ROS Issues on the QCar: Some issues were encountered with Python libraries and ROS dependencies on the QCar. These were resolved by reinstalling required packages, rebuilding the ROS workspace, and reconfiguring Python library paths.
+# Python and ROS Issues on the QCar: Some issues were encountered with Python libraries and ROS dependencies on the QCar. These were resolved by reinstalling required packages, rebuilding the ROS workspace, and reconfiguring Python library paths.
 
-#Wi-Fi Troubleshooting: Several connectivity issues were encountered with the lab Wi-Fi network. The following commands were useful for diagnosing and fixing these issues.
+# Wi-Fi Troubleshooting: Several connectivity issues were encountered with the lab Wi-Fi network. The following commands were useful for diagnosing and fixing these issues.
 
 >Disconnect a Particular Interface
 sudo nmcli device disconnect wlan0
@@ -31,7 +31,7 @@ sudo nmcli device disconnect wlan0
 sudo nmcli connection down "MWireless [0ffce0d7]"
 
 
-#QCar Bridge Setup
+# QCar Bridge Setup
 
 Bridge Script Location
 
@@ -54,7 +54,7 @@ This creates the package at:
 mkdir -p ~/my_qcar_ws/src/my_qcar_bridge_pkg/scripts
 cd ~/my_qcar_ws/src/my_qcar_bridge_pkg/scripts
 
-#Create the Bridge Script
+# Create the Bridge Script
 
 >Create and edit the Python bridge script:
 vim my_qcar_bridge.py
@@ -77,10 +77,10 @@ catkin_make
 source ~/my_qcar_ws/devel/setup.bash
 
 
-#OptiTrack / ROS / Ackermann Interface
+# OptiTrack / ROS / Ackermann Interface
 The OptiTrack setup can be completed using the lab’s internal motion capture documentation. The network parameters used for NatNet/OptiTrack communication are listed above.
 
-#Software Flow
+# Software Flow
 The software workflow used in this project was:
 
 >Establish open-loop control to confirm connection with the QCars
@@ -89,7 +89,7 @@ The software workflow used in this project was:
 >Tune the controller
 >Perform payload experiments
 
-#Script Descriptions
+# Script Descriptions
 
 >combined_publisher.py — publisher script for running both cars together
 >live_plotter.py — live plotting script for visualizing QCar trajectories
@@ -97,23 +97,23 @@ The software workflow used in this project was:
 >qcar_params.py — parameter definitions for the QCars
 >trajectory.py — trajectory generation script for available path options
 
-#During experiments, only the following scripts needed to be run directly:
+# During experiments, only the following scripts needed to be run directly:
 
 >combined_publisher.py
 >mpcspeed_steercontrol.py
 
-#Motion Capture Issues with Two QCars
+# Motion Capture Issues with Two QCars
 A challenge encountered while running both QCars together was that the motion capture system sometimes struggled to differentiate between the cars.
 
-#Fixes Implemented
+# Fixes Implemented
 >placed markers at different positions on the two cars
 >used different numbers of markers where needed
 >enabled the minimum-marker-detection option in OptiTrack
 
-#Steering Offset
+# Steering Offset
 Both QCars exhibited an approximate steering offset of about 7 degrees. This was compensated for in the code using steer_trim.
 
-#Debugging Issues Encountered During Tuning
+# Debugging Issues Encountered During Tuning
 Several debugging issues were encountered and addressed during controller tuning, the debugging comments are added in the scripts. Some of the extra debugging issues resolved were:
 >The coordinate system between the qcar and the mocap had to be checked (Do set the transformation in the optitrack)
 >state estimation issues related to v and yaw
@@ -147,19 +147,19 @@ The trajectory alignment can be adjusted by the user in the trajectory script de
 
 
 
-#The Channel of the Lab network needs to be adjusted for the qcars as there are some interruptions caused on other robots.
+# The Channel of the Lab network needs to be adjusted for the qcars as there are some interruptions caused on other robots.
 
-#The natnet_ros_cpp Gui asks for the client ip and the server ip, for the desktop system in use for the qcar the following are the details:
+# The natnet_ros_cpp Gui asks for the client ip and the server ip, for the desktop system in use for the qcar the following are the details:
 Server ip: 192.168.1.166
 Client ip: 192.168.1.111 
 Multicast Address: 239.255.42.101
 
-#For subscribing the following file on the qcar was be created:
+# For subscribing the following file on the qcar was be created:
 ./run_car.sh
 
-#Some issues occured in the usage of python libraries and ROS on QCar, those issue were resolved by reinstalling a few things and set up Python libraries again.
+# Some issues occured in the usage of python libraries and ROS on QCar, those issue were resolved by reinstalling a few things and set up Python libraries again.
 
-#A lot of wi fi issues were faced regarding the lab wi fi network, following steps can we used to figure those problems out:
+# A lot of wi fi issues were faced regarding the lab wi fi network, following steps can we used to figure those problems out:
 >To check the network connection:
 nmcli device status
 
@@ -331,7 +331,7 @@ ROS Melodic ackermann_msgs may work in Python 2.
 Quanser PAL may work in Python 3.
 If that happens, the bridge may need to be adjusted depending on which Python version both ROS messages and PAL can support.
 
-#Clean Full Command Sequence in short
+# Clean Full Command Sequence in short
 Use this as the complete setup sequence for a new QCar:
 cd ~
 mkdir -p ~/my_qcar_ws/src
@@ -346,7 +346,7 @@ catkin_make
 source devel/setup.bash
 PYTHONPATH="/home/nvidia/Quanser/libraries/python:$PYTHONPATH" rosrun my_qcar_bridge_pkg my_qcar_bridge.py
 
-#Useful Checks Before Running
+# Useful Checks Before Running
 Check available Ackermann topics:
 rostopic list | grep ackermann
 Check message type:
@@ -355,10 +355,10 @@ ackermann_msgs/AckermannDriveStamped
 Check message definition:
 rosmsg show ackermann_msgs/AckermannDriveStamped
 
-#OptiTrack / ROS / Ackermann interface:
+# OptiTrack / ROS / Ackermann interface:
 OptiTrack set up can be done with the help of Optitrack google doc of the lab. The ip addresses are mention above.
 
-#Software flow:
+# Software flow:
 >Open loop control first to establish the connection to the qcars.
 
 >Then set up of the optitrack motion capture system for the qcar.
@@ -369,7 +369,7 @@ OptiTrack set up can be done with the help of Optitrack google doc of the lab. T
 
 >Set up for the payload tests.
 
-#Which script does what:
+# Which script does what:
 >combined_pubisher.py - The publisher script for running both the cars together.
 >live_plotter.py - Plotting the live plotter for the trajectory of the qcar live.
 >mpcspeed_steercontrol.py - the mpc controller for the qcars.
@@ -378,16 +378,16 @@ OptiTrack set up can be done with the help of Optitrack google doc of the lab. T
 
 >Only combined_publisher.py and mpcspeed_steercontrol.py scripts need to be run during a experiment.
 
-#Mocap with two qcars:
+# Mocap with two qcars:
 There was problem faced when running both the qcars togetehr as mocap is not able to differentiate between cars:
 >Placing the markers at different positions.
 >Using different number of markers.
 >Choosing the minimum marker detection option in the optitrack.
 
-#The offset value of the angles
+# The offset value of the angles
 >Both the cars have some offset angle value approx 7 degrees for which they  have been adjusted in the code by usin gsteer_trim.
 
-#While Tuning some of the debugging issues which were resolved:
+# While Tuning some of the debugging issues which were resolved:
 >The states v and yaw
 >The Quaternion formatting
 >The points in the trajectory like the center of the trajectory vs. the car's starting point with respect to that. It can be changed as required yb bthe user in the trajectory script.
